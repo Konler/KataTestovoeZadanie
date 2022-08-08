@@ -1,5 +1,6 @@
 package com.company;
-
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -9,6 +10,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String expression = scanner.nextLine();
         String[] symbolsArray = expression.split(" ");
+        if(symbolsArray.length>3){
+            System.out.println("Формат математической операции не удовлетворяет заданию - два операнда и один оператор");
+            return;
+        }
         String A = symbolsArray[0];
         try {
             String sign = symbolsArray[1];
@@ -30,8 +35,11 @@ public class Main {
                     } catch (Exception e) {
                         System.out.println("В римской системе счисления нет отрицательных чисел");
                     }
-                }
-                fromArabToRoman(result);
+                } if (result==0){
+                    System.out.println("0");
+                }else {
+                System.out.println(fromArabToRoman(result));
+                };
             } else {
                 try {
                     throw new IOException();
@@ -105,41 +113,38 @@ public class Main {
         else if (index == 1) return 1;
         return 0;
     }
-    public static void fromArabToRoman(int result){
-        switch (result) {
-            case (1):
-                System.out.println("I");
-                break;
-            case (2):
-                System.out.println("II");
-                break;
-            case (3):
-                System.out.println("III");
-                break;
-            case (4):
-                System.out.println("IV");
-                break;
-            case (5):
-                System.out.println("V");
-                break;
-            case (6):
-                System.out.println("VI");
-                break;
-            case (7):
-                System.out.println("VII");
-                break;
-            case (8):
-                System.out.println("VIII");
-                break;
-            case (9):
-                System.out.println("IX");
-                break;
-            case (10):
-                System.out.println("X");
-                break;
+    public static String fromArabToRoman(int Int) {
+        //как работает этот метод пока не до конца понимаю, т.к. эту тему еще не изучала
+        LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();   //просто нашла и применила
+        roman_numerals.put("M", 1000);
+        roman_numerals.put("CM", 900);
+        roman_numerals.put("D", 500);
+        roman_numerals.put("CD", 400);
+        roman_numerals.put("C", 100);
+        roman_numerals.put("XC", 90);
+        roman_numerals.put("L", 50);
+        roman_numerals.put("XL", 40);
+        roman_numerals.put("X", 10);
+        roman_numerals.put("IX", 9);
+        roman_numerals.put("V", 5);
+        roman_numerals.put("IV", 4);
+        roman_numerals.put("I", 1);
+        String res = "";
+        for(Map.Entry<String, Integer> entry : roman_numerals.entrySet()){
+            int matches = Int/entry.getValue();
+            res += repeat(entry.getKey(), matches);
+            Int = Int % entry.getValue();
         }
+        return res;
+    }
+    public static String repeat(String s, int n) {
+        if(s == null) {
+            return null;
+        }
+        final StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < n; i++) {
+            sb.append(s);
+        }
+        return sb.toString();
     }
 }
-
-
-
