@@ -1,0 +1,145 @@
+package com.company;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        System.out.println("Введите орифметическое выражение с пробелом между символами, используя только арабские или только римские числа: ");
+        Scanner scanner = new Scanner(System.in);
+        String expression = scanner.nextLine();
+        String[] symbolsArray = expression.split(" ");
+        String A = symbolsArray[0];
+        try {
+            String sign = symbolsArray[1];
+            String B = symbolsArray[2];
+            int yazikA = romanOrArabic(A);
+            int yaziB = romanOrArabic(B);
+            if ((yazikA == 2) && (yaziB == 2)) {
+                int AInt = Integer.parseInt(A);
+                int BInt = Integer.parseInt(B);
+                int result = vichislit(AInt, sign, BInt);
+                System.out.println(result);
+            } else if ((yazikA == 1) && (yaziB == 1)) {
+                int A2 = fromRomanToArab(A);
+                int B2 = fromRomanToArab(B);
+                int result = vichislit(A2, sign, B2);
+                if (result < 0) {
+                    try {
+                        throw new Exception();
+                    } catch (Exception e) {
+                        System.out.println("В римской системе счисления нет отрицательных чисел");
+                    }
+                }
+                fromArabToRoman(result);
+            } else {
+                try {
+                    throw new IOException();
+                } catch (IOException e) {
+                    System.out.println("Используются одновременно разные системы счисления");
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+
+            System.out.println("Строка не является математической операцией");
+        }
+    }
+    static int vichislit(int A, String znakStr, int B) {
+        int result = 0;
+        switch (znakStr) {
+            case "+" -> {
+                result = A + B;
+                break;
+            }
+            case "-" -> {
+                result = A - B;
+                break;
+            }
+            case "*" -> {
+                result = A * B;
+                break;
+            }
+            case "/" -> {
+                result = A / B;
+                break;
+            }
+        }
+        return result;
+    }
+    static int fromRomanToArab(String roman) {
+        if (roman.equals("I")) {
+            return 1;
+        } else if (roman.equals("II")) {
+            return 2;
+        } else if (roman.equals("III")) {
+            return 3;
+        } else if (roman.equals("IV")) {
+            return 4;
+        } else if (roman.equals("V")) {
+            return 5;
+        } else if (roman.equals("VI")) {
+            return 6;
+        } else if (roman.equals("VII")) {
+            return 7;
+        } else if (roman.equals("VIII")) {
+            return 8;
+        } else if (roman.equals("IX")) {
+            return 9;
+        } else if (roman.equals("X")) {
+            return 10;
+        } else {
+            return 0;
+        }
+
+    }
+    public static int romanOrArabic(String chek) {   //метод определения содержится в String римское число или арабское,
+        int index = 0;                                    //возвращает 2, если арабское, здесь же проверка на диапазон [0-10]
+        String[] romanNumbers = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
+        String[] arabNumbers = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+
+        for (int i = 0; i < romanNumbers.length; i++) {
+            if (romanNumbers[i].equalsIgnoreCase(chek)) index += 1;
+            else if (arabNumbers[i].equals(chek)) index += 2;
+        }
+        if (index == 2) return 2;
+        else if (index == 1) return 1;
+        return 0;
+    }
+    public static void fromArabToRoman(int result){
+        switch (result) {
+            case (1):
+                System.out.println("I");
+                break;
+            case (2):
+                System.out.println("II");
+                break;
+            case (3):
+                System.out.println("III");
+                break;
+            case (4):
+                System.out.println("IV");
+                break;
+            case (5):
+                System.out.println("V");
+                break;
+            case (6):
+                System.out.println("VI");
+                break;
+            case (7):
+                System.out.println("VII");
+                break;
+            case (8):
+                System.out.println("VIII");
+                break;
+            case (9):
+                System.out.println("IX");
+                break;
+            case (10):
+                System.out.println("X");
+                break;
+        }
+    }
+}
+
+
+
