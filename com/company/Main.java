@@ -1,7 +1,8 @@
 package com.company;
+
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String expression = scanner.nextLine();
         String[] symbolsArray = expression.split(" ");
-        if(symbolsArray.length>3){
+        if (symbolsArray.length > 3) {
             System.out.println("Формат математической операции не удовлетворяет заданию - два операнда и один оператор");
             return;
         }
@@ -35,11 +36,13 @@ public class Main {
                     } catch (Exception e) {
                         System.out.println("В римской системе счисления нет отрицательных чисел");
                     }
-                } if (result==0){
+                }
+                if (result == 0) {
                     System.out.println("0");
-                }else {
-                System.out.println(fromArabToRoman(result));
-                };
+                } else {
+                    System.out.println(fromArabToRoman(result));
+                }
+                ;
             } else {
                 try {
                     throw new IOException();
@@ -52,6 +55,7 @@ public class Main {
             System.out.println("Строка не является математической операцией");
         }
     }
+
     static int vichislit(int A, String znakStr, int B) {
         int result = 0;
         switch (znakStr) {
@@ -74,6 +78,7 @@ public class Main {
         }
         return result;
     }
+
     static int fromRomanToArab(String roman) {
         if (roman.equals("I")) {
             return 1;
@@ -100,6 +105,7 @@ public class Main {
         }
 
     }
+
     public static int romanOrArabic(String chek) {   //метод определения содержится в String римское число или арабское,
         int index = 0;                                    //возвращает 2, если арабское, здесь же проверка на диапазон [0-10]
         String[] romanNumbers = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
@@ -113,6 +119,7 @@ public class Main {
         else if (index == 1) return 1;
         return 0;
     }
+
     public static String fromArabToRoman(int Int) {
         //как работает этот метод пока не до конца понимаю, т.к. эту тему еще не изучала
         LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();   //просто нашла и применила
@@ -130,21 +137,23 @@ public class Main {
         roman_numerals.put("IV", 4);
         roman_numerals.put("I", 1);
         String res = "";
-        for(Map.Entry<String, Integer> entry : roman_numerals.entrySet()){
-            int matches = Int/entry.getValue();
+        for (Map.Entry<String, Integer> entry : roman_numerals.entrySet()) {
+            int matches = Int / entry.getValue();
             res += repeat(entry.getKey(), matches);
             Int = Int % entry.getValue();
         }
         return res;
     }
+
     public static String repeat(String s, int n) {
-        if(s == null) {
+        if (s == null) {
             return null;
         }
         final StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             sb.append(s);
         }
         return sb.toString();
     }
+
 }
