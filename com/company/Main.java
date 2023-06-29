@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        int i=1;
         System.out.println("Введите орифметическое выражение с пробелом между символами, используя только арабские или только римские числа: ");
         Scanner scanner = new Scanner(System.in);
         String expression = scanner.nextLine();
