@@ -41,7 +41,7 @@ public class Main {
                     }
                 }
                 if (result == 0) {
-                    System.out.println("0");
+                    System.out.println("00");
                 } else {
                     System.out.println(fromArabToRoman(result));
                 }
