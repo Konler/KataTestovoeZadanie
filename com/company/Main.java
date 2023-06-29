@@ -15,7 +15,7 @@ public class Main {
         String expression = scanner.nextLine();
         String[] symbolsArray = expression.split(" ");
         if (symbolsArray.length > 3) {
-            System.out.println("Формат математической опеlkjhgfdfgthyujiрации не удовлетворяет заданию - два операнда и один оператор");
+            System.out.println("Формат матемвапролджатической опеlkjhgfdfgthyujiрации не удовлетворяет заданию - два операнда и один оператор");
             return;
         }
         String A = symbolsArray[0];
